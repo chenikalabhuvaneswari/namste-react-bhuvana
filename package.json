@@ -1,0 +1,22 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "bhuvana is doing the react ",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenikalabhuvaneswari/namste-react-bhuvana.git"
+  },
+  "author": "bhuvana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenikalabhuvaneswari/namste-react-bhuvana/issues"
+  },
+  "homepage": "https://github.com/chenikalabhuvaneswari/namste-react-bhuvana#readme",
+  "devDependencies": {
+    "parcel": "^2.15.1"
+  }
+}
