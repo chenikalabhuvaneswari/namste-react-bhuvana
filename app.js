@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
 /* <div id="parent">
     <div id="child1">
         <h1 id ="h1heading">i am h1 tag </h1>
@@ -25,7 +28,7 @@
 //     ]),
 // ]);
 
-const heading = React.createElement("h1",{class:"b.tech"},"i am h1 tag from react ");
+const heading = React.createElement("h1",{className:"b.tech"},"i am h1 1tags from react ");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(heading)
 
