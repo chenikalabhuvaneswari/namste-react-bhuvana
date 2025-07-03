@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/chenikalabhuvaneswari/namste-react-bhuvana#readme",
   "devDependencies": {
-    "parcel": "^2.15.1"
+    "parcel": "^2.15.4"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "browserlists":[
+  "browserlists": [
     "latest 2 chrome version"
   ]
 }
