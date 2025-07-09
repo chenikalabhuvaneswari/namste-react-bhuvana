@@ -1,6 +1,6 @@
 import RestaurentCard from "./RestaurentCard";
-import {restaurantList}  from "../utils/MockData.js";
-
+// import {restaurantList}  from "../utils/MockData.js";
+import Shimmer from "./Shimmer";
 import { useState,useEffect } from "react";
 
 
@@ -10,10 +10,10 @@ const Body = () => {
 
     const [ListOfRestaurents , setListOfRestaurents] = useState([]);
 
+    const [searchText, setSearchText] = useState("");
 
     useEffect(() =>{
-        fetchData();
-    
+        fetchData(); 
     }, []);
 
     const fetchData =async () =>{
@@ -27,8 +27,8 @@ const Body = () => {
             }
             const jsonData = await data.json(); 
             console.log("this is useEffect data",jsonData);
-            setListOfRestaurents(jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
-            setallrestaurents(jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+            setListOfRestaurents(jsonData?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants); 
+            setallrestaurents(jsonData?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
 
         }catch(error){
@@ -39,19 +39,47 @@ const Body = () => {
 
     console.log("before useEffect ")
 
+    //conditional rendering 
+
+
+
     // LOCAL state variable - super powerful variable 
     //  hook is normal javascript function 
 
-    return (
+    return ListOfRestaurents.length === 0? <Shimmer/>: (
 
         <div className="body">
 
             <div className="filter">
+                <input 
+                    className="search-bOX"
+                    type="text"
+                    placeholder="search-restaurent"
+                    value= {searchText}
+                    onChange={(e)=> {
+                        setSearchText(e.target.value)
+
+                    }}
+                />
+
+                <button
+                    className="search-button"
+                    onClick={() =>{
+
+                        const searchedRestauresnt = allrestaurents.filter(
+                            (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()))
+                        setListOfRestaurents(searchedRestauresnt);
+                    }}
+                >
+                    search
+                </button>
             
-                <button  className=" filter-btn" onClick={() =>{
-                    const filteredList = ListOfRestaurents.filter(
-                        (res) => res.info.avgRating> 4.7
-                    );
+                <button  
+                    className=" filter-btn" 
+                    onClick={() =>{
+                        const filteredList = allrestaurents.filter(
+                            (res) => res.info.avgRating> 4.7
+                        );
                     setListOfRestaurents(filteredList);
 
                 }} >
