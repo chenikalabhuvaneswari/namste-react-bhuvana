@@ -5,7 +5,7 @@ import Body from  "./components/Body";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import About from "./components/About";
-import { createBrowserRouter , RouterProvider ,Outlet} from "react-router-dom";
+import { createHashRouter , RouterProvider ,Outlet} from "react-router-dom";
 
 
 
@@ -21,7 +21,7 @@ const  AppLayout = () => {
     );
 };
 
-const AppRouter =createBrowserRouter([
+const AppRouter =createHashRouter([
     {
         path:"/",
         element:<AppLayout /> ,
