@@ -20,10 +20,10 @@ const  [btnstate,setbtnstate] = useState("login")
                     <li>Contact Us</li>
                     <li>Help</li>
                     <button 
-                    // className = "login-btn"
-                    onClick= { () =>{   (btnstate === "login" )?
-                    setbtnstate("logout"):
-                    setbtnstate("login");
+                        className = "login-btn"
+                        onClick= { () =>{   (btnstate === "login" )?
+                        setbtnstate("logout"):
+                        setbtnstate("login");
                     }}>
                         {btnstate} 
                     </button>
