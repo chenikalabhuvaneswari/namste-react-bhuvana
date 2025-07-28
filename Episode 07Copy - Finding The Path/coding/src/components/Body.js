@@ -1,8 +1,9 @@
 import RestaurentCard from "./RestaurentCard";
 // import {restaurantList}  from "../utils/MockData.js";
-import { SWIGGY_MOCK_API } from "../utils/Constants";
-import Shimmer from "./Shimmer";
+import { SWIGGY_API_URL, SWIGGY_MOCK_API } from "../utils/Constants";
+import {Shimmer} from "./Shimmer";
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 const Body = () => {
@@ -19,17 +20,14 @@ const Body = () => {
 
     const fetchData =async () =>{
         try{
-            const  data = await fetch(SWIGGY_MOCK_API
+            const  responsePromise  = await fetch(SWIGGY_API_URL);   //gives the response object 
 
-            );
-            if(!data.ok){
-                
-                throw new Error("error in fetching the data ")   //writing own error 
-            }
-            const jsonData = await data.json(); 
-            console.log("this is useEffect data",jsonData);
-            setListOfRestaurents(jsonData?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants); 
-            setallrestaurents(jsonData?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+            const jsonData = await responsePromise.json(); 
+            console.log("this is useEffect  call back function data in body.js",jsonData);
+            const Restaurents= jsonData?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            console.log("I extraxted the list of restaurants from swiggy api in body.js",Restaurents);
+            setListOfRestaurents(Restaurents); 
+            setallrestaurents(Restaurents);
 
 
         }catch(error){
@@ -40,13 +38,10 @@ const Body = () => {
 
     console.log("before useEffect ")
 
-    //conditional rendering 
-
-
-
     // LOCAL state variable - super powerful variable 
     //  hook is normal javascript function 
-
+    
+    //conditional rendering 
     return ListOfRestaurents.length === 0? <Shimmer/>: (
 
         <div className="body">
@@ -79,7 +74,7 @@ const Body = () => {
                     className=" filter-btn" 
                     onClick={() =>{
                         const filteredList = allrestaurents.filter(
-                            (res) => res.info.avgRating> 4.7
+                            (res) => res.info.avgRating> 4.0
                         );
                     setListOfRestaurents(filteredList);
 
@@ -98,11 +93,14 @@ const Body = () => {
 
 
             <div className="restaurent-container">
-                {ListOfRestaurents.map((restaurenttt) => (
-                    <RestaurentCard  
-                        key ={restaurenttt.info.id}
-                        restaurentData = {restaurenttt}
-                    />
+                {ListOfRestaurents.map((restaurent) => (
+                    <Link  
+                        key ={restaurent.info.id} 
+                        to = {`/restaurant/${restaurent.info.id}`}
+                    >
+                        
+                        <RestaurentCard  restaurentData = {restaurent}/>
+                    </Link>
                     ))}
                 
             </div>

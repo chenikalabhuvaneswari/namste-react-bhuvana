@@ -16,7 +16,10 @@ const  [btnstate,setbtnstate] = useState("login")
             </div>
             <div className ="nav-items ">
                 <ul className="unorderd list">
-                    <li>Home </li>
+                    <li>
+                        <Link to = "/" >Home </Link>
+                        
+                    </li>
                     <li>
                         <a href= "/about">About us</a>   
                          {/* i kept like this only to know the difference between the achor tag and Link conponen */}
