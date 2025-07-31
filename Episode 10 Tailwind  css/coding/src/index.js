@@ -9,6 +9,7 @@ import {  Outlet, RouterProvider , createBrowserRouter} from "react-router-dom";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 
+
 const AboutLazy = lazy(() => import("./components/About"))
 //dynamic import 
 // lazy coding 

@@ -8,18 +8,18 @@ const  onlineStatus = useOnlineStatus();
 
 
     return (
-        <div className  ="header">
-            <div className="logo-container">
+        <div className  ="flex">
+            <div >
                 <img  
-                    className="logo"
+                    
                     src="https://img.freepik.com/free-vector/food-logo-template_23-2148766603.jpg" 
                     alt ="food-logo" 
                 />
             </div>
             <div className ="nav-items ">
-                <ul className="unorderd list">
+                <ul className="flex">
                     <li>OnlineStatus : {onlineStatus?"🟩":"🔴"} </li>
-                    <li>
+                    <li className= "bg-orange-950" >
                         <Link to = "/" >Home </Link>
                         
                     </li>
