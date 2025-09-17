@@ -1,11 +1,12 @@
-import RestaurentCard from "./RestaurentCard";
+import RestaurentCard ,{withOpenLabel} from "./RestaurentCard";
 // import {restaurantList}  from "../utils/MockData.js";
 import { SWIGGY_API_URL, SWIGGY_MOCK_API } from "../utils/Constants";
 import {Shimmer} from "./Shimmer";
-import { useState,useEffect } from "react";
+import { useState,useEffect , useContext } from "react";
 import { Link } from "react-router-dom";
 
 import useOnlineStatus from "../utils/useOnlineStatus";
+ import UserContext from "../utils/UserContext";
 
 
 
@@ -18,6 +19,8 @@ const Body = () => {
     const [searchText, setSearchText] = useState("");
 
     const onlineStatus = useOnlineStatus();
+
+    const RestaurantOpened = withOpenLabel(RestaurentCard);
 
 
     useEffect(() =>{
@@ -50,21 +53,27 @@ const Body = () => {
     //conditional rendering 
     if (onlineStatus === false ){
         return(
-            <h1>You re offline . pleaseinternet connectiom</h1>
+            <h1>You re offline . please use     internet connectiom</h1>
         )
     }
+
+    const { setUserNmae , loggedInUser} = useContext(UserContext); 
+
+    
 
 
 
     return ListOfRestaurents.length === 0? <Shimmer/>: (
 
-        <div className="body">
+        <div className="">
 
-            <div className="filter">
+            <div className="p-2 m-2  flex justify-between  ">
+                <div >
                 <input 
-                    className="search-bOX"
+                    className="placeholder:text-gray-500 placeholder:italic  mx-2 px-2 border border-solid border-black rounded-2xl "
                     type="text"
-                    placeholder="search-restaurent"
+                    placeholder="search-restaurent...."
+                    name="search"
                     value= {searchText}
                     onChange={(e)=> {
                         setSearchText(e.target.value)
@@ -73,7 +82,7 @@ const Body = () => {
                 />
 
                 <button
-                    className="search-button"
+                    className=" "
                     onClick={() =>{
 
                         const searchedRestauresnt = allrestaurents.filter(
@@ -81,11 +90,13 @@ const Body = () => {
                         setListOfRestaurents(searchedRestauresnt);
                     }}
                 >
-                    search
+                     🔍 
                 </button>
+
+                </div>
             
                 <button  
-                    className=" filter-btn" 
+                    className=" placeholder:text-gray-500 placeholder:italic  mx-2 px-2 border border-solid border-black rounded-2xl bg-orange-200" 
                     onClick={() =>{
                         const filteredList = allrestaurents.filter(
                             (res) => res.info.avgRating> 4.0
@@ -96,24 +107,45 @@ const Body = () => {
                     Top Rated restaurants
                 </button>
 
-                <button className="reset-btn" onClick={() =>{
+                <button className="placeholder:text-gray-500 placeholder:italic  mx-2 px-2 border border-solid border-black rounded-2xl  bg-orange-200" 
+                onClick={() =>{
                     setListOfRestaurents(allrestaurents)
                 }} >
                     Show all 
                 </button>
+                <label>UserName:</label>
+                <input 
+                    className="placeholder:text-gray-500 placeholder:italic  mx-2 px-2 border border-solid border-black rounded-2xl "
+                    type="text"
+                    placeholder="search-username...."
+                    name="search"
+                    value= {loggedInUser}
+                    onChange={(e)=> {
+                        setUserNmae (e.target.value)
+
+                    }}
+                />
+                
 
 
             </div>
+            
 
 
-            <div className="restaurent-container">
+            <div className="flex flex-wrap gap-4 p-10 m-8">
                 {ListOfRestaurents.map((restaurent) => (
                     <Link  
                         key ={restaurent.info.id} 
                         to = {`/restaurant/${restaurent.info.id}`}
+                        className="w-64 "
                     >
+                        {
+                            restaurent.info.isOpen ? 
+
+                            <RestaurantOpened restaurentData = {restaurent}/> :
                         
-                        <RestaurentCard  restaurentData = {restaurent}/>
+                            <RestaurentCard  restaurentData = {restaurent}/>
+                        }
                     </Link>
                     ))}
                 

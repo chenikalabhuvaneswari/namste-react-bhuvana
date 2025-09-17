@@ -7,7 +7,7 @@ const Footer = () =>{
     return (
     
        
-        <div className="footer">
+        <div className="flex   bg-orange-300 rounded-md p-4 m-5 ">
             created by {" "}
                 <span>Rajesh </span>{" "}
             <a href ={LINKDIN_URL} target = "_blank">

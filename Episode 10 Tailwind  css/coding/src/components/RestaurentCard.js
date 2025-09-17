@@ -1,7 +1,7 @@
 import { CDN_URL } from "../utils/Constants";
 
 
-const RestaurentCard =(props) =>{
+const RestaurentCard = (props) =>{
     const { restaurentData } = props;
     const {cloudinaryImageId,name,areaName,avgRating,cuisines,costForTwo,deliveryTime}=restaurentData?.info;
     return(
@@ -9,7 +9,7 @@ const RestaurentCard =(props) =>{
             <img
                 src={CDN_URL + cloudinaryImageId}
                 alt= {name}
-                className="restaurent-logo"
+                className="restaurent-logo" 
             />
             <div className="restaurent-details">
                 <h3>
@@ -30,6 +30,20 @@ const RestaurentCard =(props) =>{
 
     );
 
+}
+
+export const withOpenLabel = (WrappedComponent) =>{
+    return (props) =>{
+
+        return (
+
+            <div>
+                <label className="rounded-lg bg-black text-white absolute shadow-xl">Opened</label>
+                <WrappedComponent {...props}/>
+                
+            </div>
+        )
+    }
 }
 
 

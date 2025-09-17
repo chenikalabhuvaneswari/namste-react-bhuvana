@@ -1,4 +1,3 @@
-
 import { SWIGGY_MENU_APIcopy } from "./Constants"
 import { useEffect,useState } from "react";
 
@@ -11,14 +10,14 @@ const useRestaurantMenu = (resid) => {
 
     useEffect(() =>{
         fetchData();
-
     },[]);
+
     const fetchData = async  () =>{
         const  response = await fetch(SWIGGY_MENU_APIcopy + resid);
         const jsonData = await response.json();
          
         setresInfo(jsonData.data)
-        
+        // console.log("menu data "+jsonData.data)
     }
 
   return resInfo;
